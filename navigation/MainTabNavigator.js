@@ -1,18 +1,22 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Icon } from 'expo';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator } from 'react-navigation';
 
+import NotificationHeader from 'components/NotificationHeader';
 import Colors from 'app-constants/Colors';
 import HomePageContainer from 'containers/HomePage';
 import PostScreen from 'screens/PostScreen';
-import SettingScreen from 'screens/SettingScreen';
+import NotificationScreen from 'screens/NotificationScreen';
+import BookmarkScreen from 'screens/BookmarkScreen';
+import ItemDetailScreen from 'screens/ItemDetailScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomePageContainer,
+  Detail: ItemDetailScreen,
 });
 
-HomeStack.navigationOptions = {
+HomeStack.navigationOptions = {    
   tabBarLabel: () => null,
   tabBarIcon: ({ focused }) => (
     <Icon.Feather
@@ -49,8 +53,11 @@ PostStack.navigationOptions = {
 };
 
 
-const NotificationStack = createStackNavigator({
-  Setting: SettingScreen,
+const NotificationStack = createMaterialTopTabNavigator({
+  Notification: NotificationScreen,
+  Bookmark: BookmarkScreen,
+}, {
+  tabBarComponent: NotificationHeader,
 });
 
 NotificationStack.navigationOptions = {
@@ -71,7 +78,7 @@ export default createBottomTabNavigator({
 }, {
   tabBarOptions: {
     style: {
-      backgroundColor: '#FAFAFA',
+      backgroundColor: Colors.bottomBarBackground,
     },
   },
 });

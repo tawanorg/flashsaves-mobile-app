@@ -5,10 +5,12 @@ import {
   FlatList,
   View,
   ScrollView,
+  SafeAreaView,
+  TouchableOpacity
 } from 'react-native';
 import { Icon } from 'expo';
-import Header from 'components/Header';
-import ItemCard from 'components/ItemCard';
+import Header from 'components/HomeHeader';
+import GridItems from 'components/GridItems';
 import Layouts from 'app-constants/Layout';
 import Colors from 'app-constants/Colors';
 
@@ -67,15 +69,13 @@ const filtersData = [
 
 export default class extends React.Component {
   static navigationOptions = {
-    header: <Header />
+    header: <Header />,
+    gesturesEnabled: false,
   };
 
   render() {
-    const column1Data = data.filter((item, i) => i%2 === 0);
-    const column2Data = data.filter((item, i) => i%2 === 1);
-
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <View style={{ flex: 1 }}>
           <View>
             <FlatList
@@ -95,42 +95,14 @@ export default class extends React.Component {
               )}
             />
           </View>
-          <ScrollView style={styles.contentContainer}>
-            <View style={styles.wrapper}>
-              <View style={styles.column}>
-                <FlatList
-                  scrollEnabled={false}
-                  data={column1Data}
-                  renderItem={({ item, index }) => (
-                    <ItemCard 
-                      photoUrl={item.photoUrl}
-                      style={[styles.item, { 
-                        height: item.height, 
-                        marginLeft: 0,
-                      }]}
-                    />
-                  )}
-                />
-              </View>
-              <View style={styles.column}>
-                <FlatList
-                  scrollEnabled={false}
-                  data={column2Data}
-                  renderItem={({ item, index }) => (
-                    <ItemCard 
-                      photoUrl={item.photoUrl}
-                      style={[styles.item, {
-                        height: item.height, 
-                        marginRight: 0,
-                      }]}
-                    />
-                  )}
-                />
-              </View>
-            </View>
+          <ScrollView style={styles.gridItemWrapper}>
+            <GridItems 
+              data={data} 
+              onPressItem={(item) => this.props.navigation.navigate('Detail', item)}
+            />
           </ScrollView>
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -141,19 +113,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#FFFFFF'
   },
-  contentContainer: {
+  gridItemWrapper: {
     paddingHorizontal: Layouts.gutterWidth,
   },
-  wrapper: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  column: {
-    flex: 1,
-    flexDirection: 'column'
-  },
   filterItem: {
-    backgroundColor: '#EEEEEE',
+    backgroundColor: Colors.backgroundColorLight,
     borderRadius: 5,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -165,7 +129,7 @@ const styles = StyleSheet.create({
   filterItemText: {
     position: 'relative',
     top: -1,
-    color: '#333',
+    color: Colors.black,
     fontWeight: "600",
     fontSize: 13,
     lineHeight: 20,
@@ -179,7 +143,4 @@ const styles = StyleSheet.create({
   filterSelectedText: {
     color: '#FFFFFF'
   },
-  item: {
-    margin: Layouts.gutterWidth / 2,
-  }
 });

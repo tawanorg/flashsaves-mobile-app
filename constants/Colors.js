@@ -1,12 +1,19 @@
 const red = '#E84E3D';
 const black = '#333333';
+const light = '#EEEEEE';
+const white = '#FFFFFF';
 
 export default {
   primary: red,
   color: black,
-  tabIconDefault: '#666666',
+  light: light,
+  black,
+  backgroundColorLight: light,
+  // Menu 
+  tabIconDefault: black,
   tabIconSelected: black,
-  headerBackground: '#FFFFFF',
-  headerSearchBackground: '#efefef',
-  headerMenuIconColor: '#8e8e8e'
+  // Header
+  headerBackground: white,
+  // Bottom bar
+  bottomBarBackground: light,
 };

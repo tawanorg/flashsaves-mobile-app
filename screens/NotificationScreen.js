@@ -5,15 +5,15 @@ import {
   View,
 } from 'react-native';
 
-export default class extends React.Component {
+class NotificationScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    title: 'title ',
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Screen</Text>
+        <Text>NotificationScreen</Text>
       </View>
     );
   }
@@ -25,3 +25,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
+export default NotificationScreen;
