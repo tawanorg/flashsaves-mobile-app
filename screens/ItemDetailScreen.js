@@ -88,7 +88,7 @@ class ItemDetailScreen extends React.Component {
                           source={{ uri: photoUrl }}
                         />
                       </BlurView>
-                      <View style={styles.socialContainer}>
+                      {/* <View style={styles.socialContainer}>
                         <TouchableOpacity style={styles.button}>
                           <Icon.Feather
                             name="heart"
@@ -113,8 +113,16 @@ class ItemDetailScreen extends React.Component {
                           />
                           <Text style={styles.buttonText}>~1.5 Km</Text>
                         </TouchableOpacity>
-                      </View>
+                      </View> */}
                       <View style={styles.arrowContainer}>
+                        <TouchableOpacity style={[styles.arrowButton, styles.button]}>
+                          <Icon.Feather
+                            name="heart"
+                            size={24}
+                            color="#FFFFFF"
+                          />
+                          <Text style={styles.buttonText}>4.5k Liked</Text>
+                        </TouchableOpacity>
                         {index !== 0 && (
                           <TouchableOpacity 
                             onPress={() => navigator.pop()}
@@ -141,6 +149,14 @@ class ItemDetailScreen extends React.Component {
                             </TouchableOpacity>
                           )
                         }
+                        <TouchableOpacity style={[styles.arrowButton, styles.button]}>
+                          <Icon.Feather
+                            name="map-pin"
+                            size={24}
+                            color="#FFFFFF"
+                          />
+                          <Text style={styles.buttonText}>~1.5 Km</Text>
+                        </TouchableOpacity>
                       </View>
                       <LinearGradient
                         colors={['transparent', 'transparent', 'rgba(0,0,0,0.8)']}
@@ -220,12 +236,16 @@ const styles = StyleSheet.create({
   },
   button: {
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    width: 60,
+    position: 'relative',
+    top: 3,
   },
   buttonText: {
     color: '#FFFFFF',
-    fontSize: 15,
-    marginTop: 5,
+    fontSize: 12,
+    marginTop: 3
   },
   userContainer: {
     padding: Layouts.gutterWidth,
@@ -256,6 +276,7 @@ const styles = StyleSheet.create({
     zIndex: 200,
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
     paddingVertical: Layouts.gutterWidth * 2,
   },
   arrowButton: {
@@ -263,9 +284,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: Colors.black,
-    width: 45,
-    height: 45,
-    borderRadius: 45 / 2,
+    width: 50,
+    height: 50,
+    borderRadius: 50 / 2,
     marginHorizontal: 10
   },
 });
